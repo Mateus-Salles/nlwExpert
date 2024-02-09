@@ -5,11 +5,11 @@ import z from 'zod';
 export async function createPoll(app: FastifyInstance) {
     app.post('/polls', async (request, reply) => {
         const createPollBody = z.object({
-            title: z.string(), // Isso obriga que seja passada uma string para title
+            title: z.string(),
             options: z.array(z.string()),
         });
 
-        const { title, options } = createPollBody.parse(request.body); // Valida e retorna request.body
+        const { title, options } = createPollBody.parse(request.body);
 
         const poll = await prisma.poll.create({
             data: {
